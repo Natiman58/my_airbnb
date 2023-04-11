@@ -25,15 +25,18 @@ class FileStorage:
             with key 'obj class name.id'
         """
         key = obj.__class__.__name__ + "." + obj.id
-        self.__objects[key] = obj
+        self.__objects[key] = obj.to_dict()
+        print(f"This-> {self.__objects}")
     def save(self):
         """
             serializes __objects dict to a JSON file
             dump on to a JSON file
         """
-        with open(self.__file_path, 'w') as f:
-            print(self.__objects)
-            json.dump(self.__objects, f)
+        try:
+            with open(self.__file_path, 'w') as f:
+                json.dump(self.__objects, f)
+        except Exception as e:
+            print(f"Error writing to file: {e}")
 
     def reload(self):
         """
@@ -43,9 +46,8 @@ class FileStorage:
         try:
             if os.path.isfile(self.__file_path):
                 with open(self.__file_path, 'r') as f:
-                    print(f.read())
-
-                    self.__objects = json.load(f)
+                    self.__objects = json.loads(f.read())
+                    #print(self.__objects)
 
                 for key, value in self.__objects.items():
                     class_name, obj_id = key.split(".")
