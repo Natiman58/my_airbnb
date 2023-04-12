@@ -5,6 +5,17 @@
 """
 import json
 import os
+from datetime import datetime
+
+class CustomJSONEncoder(json.JSONEncoder):
+    def default(self, obj):
+        from models.base_model import BaseModel
+        if isinstance(obj, datetime):
+            return obj.isoformat()
+        elif isinstance(obj, BaseModel):
+            return obj.to_dict()
+        else:
+            return super().default(obj)
 
 class FileStorage:
     """
@@ -13,12 +24,13 @@ class FileStorage:
     """
     __file_path = 'file.json'
     __objects = {}
-        
+
     def all(self):
         """
             return the dict of __objects
         """
         return self.__objects
+
     def new(self, obj):
         """
             adds obj to the __objects dict
@@ -26,33 +38,40 @@ class FileStorage:
         """
         key = obj.__class__.__name__ + "." + obj.id
         self.__objects[key] = obj.to_dict()
-        print(f"This-> {self.__objects}")
+        #print(f"The new obj added-> {self.__objects}")
+
     def save(self):
         """
-            serializes __objects dict to a JSON file
-            dump on to a JSON file
+            Serializes __objects to the JSON file (path: __file_path)
         """
-        try:
-            with open(self.__file_path, 'w') as f:
-                json.dump(self.__objects, f)
-        except Exception as e:
-            print(f"Error writing to file: {e}")
+        from models.base_model import BaseModel
+        objs_dict = {}
+        for key, value in self.__objects.items():
+            if isinstance(value, BaseModel):
+                objs_dict[key] = value.to_dict()
+            objs_dict[key] = value
+
+        with open(self.__file_path, mode='w', encoding='utf-8') as f:
+            json.dump(objs_dict, f, indent=4, cls=CustomJSONEncoder)
 
     def reload(self):
         """
-            deserialize the json file to a dict object; __objects
-            load the object from the json file
+            Deserialize the JSON file to a dict object;
+            Load the object from the JSON file
         """
+        from models.base_model import BaseModel
+        class_map = {
+            'BaseModel': BaseModel
+        }
         try:
             if os.path.isfile(self.__file_path):
-                with open(self.__file_path, 'r') as f:
-                    self.__objects = json.loads(f.read())
-                    #print(self.__objects)
-
-                for key, value in self.__objects.items():
-                    class_name, obj_id = key.split(".")
-                    obj_class = eval(class_name)  # dynamically retrieve class name
-                    obj = obj_class(**value)
-                    self.__objects[key] = obj
+                with open(self.__file_path, 'r', encoding="utf-8") as f:
+                    data = json.load(f)
+                    for key, value in data.items():
+                        class_name, obj_id = key.split('.')
+                        obj_class = class_map.get(class_name)
+                        if obj_class:
+                                obj = obj_class(**value)
+                                self.__objects[key] = obj
         except FileNotFoundError:
             pass
