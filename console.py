@@ -13,6 +13,7 @@ from models.place import Place
 from models.state import State
 from models.amenity import Amenity
 from models.review import Review
+import re
 
 class HBNBCommand(cmd.Cmd):
     """
@@ -182,8 +183,20 @@ class HBNBCommand(cmd.Cmd):
         args = arg.split('.')
         if args[1] == 'all()':
             return User.all(self)
-        elif args[1] == 'count()':
+        if args[1] == 'count()':
             return User.count(self)
+        try:
+            pattern = r'([a-f\d]{8}(-[a-f\d]{4}){3}-[a-f\d]{12})' # regx pattern to match uuid format
+            match = re.search(pattern, args[1])
+            if match:
+                id = match.group()
+                if args[1] == f'show({id})':
+                    return User.show(self, id)
+            else:
+                print("** Intance not found **")
+        except UnboundLocalError:
+            pass
+
 
     def do_Place(self, arg):
         """
