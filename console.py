@@ -193,7 +193,7 @@ class HBNBCommand(cmd.Cmd):
                 if args[1] == f'show({id})':
                     return User.show(self, id)
             else:
-                print("** Intance not found **")
+                print("** no intance found **")
         except UnboundLocalError:
             pass
 
