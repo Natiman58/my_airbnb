@@ -205,8 +205,19 @@ class HBNBCommand(cmd.Cmd):
         args = arg.split('.')
         if args[1] == 'all()':
             return Place.all(self)
-        elif args[1] == 'count()':
+        if args[1] == 'count()':
             return Place.count(self)
+        try:
+            pattern = r'([a-f\d]{8}(-[a-f\d]{4}){3}-[a-f\d]{12})' # regx pattern to match uuid format
+            match = re.search(pattern, args[1])
+            if match:
+                id = match.group()
+                if args[1] == f'show({id})':
+                    return Place.show(self, id)
+            else:
+                print("** no intance found **")
+        except UnboundLocalError:
+            pass
 
     def do_State(self, arg):
         """
@@ -215,8 +226,19 @@ class HBNBCommand(cmd.Cmd):
         args = arg.split('.')
         if args[1] == 'all()':
             return State.all(self)
-        elif args[1] == 'count()':
+        if args[1] == 'count()':
             return State.count(self)
+        try:
+            pattern = r'([a-f\d]{8}(-[a-f\d]{4}){3}-[a-f\d]{12})' # regx pattern to match uuid format
+            match = re.search(pattern, args[1])
+            if match:
+                id = match.group()
+                if args[1] == f'show({id})':
+                    return State.show(self, id)
+            else:
+                print("** no intance found **")
+        except UnboundLocalError:
+            pass
 
     def do_City(self, arg):
         """
@@ -227,6 +249,17 @@ class HBNBCommand(cmd.Cmd):
             return City.all(self)
         elif args[1] == 'count()':
             return City.count(self)
+        try:
+            pattern = r'([a-f\d]{8}(-[a-f\d]{4}){3}-[a-f\d]{12})' # regx pattern to match uuid format
+            match = re.search(pattern, args[1])
+            if match:
+                id = match.group()
+                if args[1] == f'show({id})':
+                    return City.show(self, id)
+            else:
+                print("** no intance found **")
+        except UnboundLocalError:
+            pass
 
     def do_Review(self, arg):
         args = arg.split('.')
@@ -234,6 +267,17 @@ class HBNBCommand(cmd.Cmd):
             return Review.all(self)
         elif args[1] == 'count()':
             return Review.count(self)
+        try:
+            pattern = r'([a-f\d]{8}(-[a-f\d]{4}){3}-[a-f\d]{12})' # regx pattern to match uuid format
+            match = re.search(pattern, args[1])
+            if match:
+                id = match.group()
+                if args[1] == f'show({id})':
+                    return Review.show(self, id)
+            else:
+                print("** no intance found **")
+        except UnboundLocalError:
+            pass
 
     def do_Amenity(self, arg):
         args = arg.split('.')
@@ -241,6 +285,17 @@ class HBNBCommand(cmd.Cmd):
             return Amenity.all(self)
         elif args[1] == 'count()':
             return Amenity.count(self)
+        try:
+            pattern = r'([a-f\d]{8}(-[a-f\d]{4}){3}-[a-f\d]{12})' # regx pattern to match uuid format
+            match = re.search(pattern, args[1])
+            if match:
+                id = match.group()
+                if args[1] == f'show({id})':
+                    return Amenity.show(self, id)
+            else:
+                print("** no intance found **")
+        except UnboundLocalError:
+            pass
 
 
 if __name__ == '__main__':

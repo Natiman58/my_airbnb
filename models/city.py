@@ -54,3 +54,19 @@ class City(BaseModel):
                 obj_str = f"[{class_name}] ({dict_value.get('id')}) {dict_value}"
                 obj_list.append(obj_str)
         print(len(obj_list))
+
+    def show(self, id):
+        """
+            shows the instance using the given id
+        """
+        from models import storage
+
+        id_list = []
+        all_objs = storage.all()
+        for key in all_objs.keys():
+            obj_id = key.split('.')[1]
+            id_list.append(obj_id)
+        if id in id_list:
+            #class_name = all_objs[key].__class__.__name__
+            obj = storage.all()['City' + '.' + id]
+            print(obj)
