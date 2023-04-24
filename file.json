@@ -1,14 +1,50 @@
 {
-    "BaseModel.be31a520-7632-47b7-be59-fa0aa9b6e626": {
-        "id": "be31a520-7632-47b7-be59-fa0aa9b6e626",
-        "created_at": "2023-04-19T23:54:50.247116",
-        "updated_at": "2023-04-19T23:54:50.247121",
-        "__class__": "BaseModel"
+    "User.60b0c695-de14-41c7-9f79-957b5c361088": {
+        "id": "60b0c695-de14-41c7-9f79-957b5c361088",
+        "created_at": "2023-04-24T11:40:16.539567",
+        "updated_at": "2023-04-24T11:40:16.539577",
+        "__class__": "User"
     },
-    "BaseModel.cd36d7e8-f236-46d3-ba44-c5558b61a3fc": {
-        "id": "cd36d7e8-f236-46d3-ba44-c5558b61a3fc",
-        "created_at": "2023-04-19T23:54:50.247123",
-        "updated_at": "2023-04-19T23:54:50.247124",
-        "__class__": "BaseModel"
+    "User.859c62e0-9b6e-425f-a73c-43978734187f": {
+        "id": "859c62e0-9b6e-425f-a73c-43978734187f",
+        "created_at": "2023-04-24T11:40:16.539583",
+        "updated_at": "2023-04-24T11:40:16.539585",
+        "__class__": "User"
+    },
+    "Place.b6cfc1b9-32e5-4102-8290-a807a6b491e3": {
+        "id": "b6cfc1b9-32e5-4102-8290-a807a6b491e3",
+        "created_at": "2023-04-24T11:40:16.539590",
+        "updated_at": "2023-04-24T11:40:16.539593",
+        "__class__": "Place"
+    },
+    "Place.114ade81-4baf-49b8-ac62-bcdf3b4bc713": {
+        "id": "114ade81-4baf-49b8-ac62-bcdf3b4bc713",
+        "created_at": "2023-04-24T11:40:16.539596",
+        "updated_at": "2023-04-24T11:40:16.539598",
+        "__class__": "Place"
+    },
+    "State.a6f59e58-ad79-4a46-aa55-b49cea3d1621": {
+        "id": "a6f59e58-ad79-4a46-aa55-b49cea3d1621",
+        "created_at": "2023-04-24T11:40:16.539606",
+        "updated_at": "2023-04-24T11:40:16.539608",
+        "__class__": "State"
+    },
+    "Review.c8711b10-e5fa-448e-8e0c-ad5114c4d192": {
+        "id": "c8711b10-e5fa-448e-8e0c-ad5114c4d192",
+        "created_at": "2023-04-24T11:40:16.539613",
+        "updated_at": "2023-04-24T11:40:16.539615",
+        "__class__": "Review"
+    },
+    "City.c309bdfe-f5f8-4755-9310-28a2facf5102": {
+        "id": "c309bdfe-f5f8-4755-9310-28a2facf5102",
+        "created_at": "2023-04-24T11:40:16.539620",
+        "updated_at": "2023-04-24T11:40:16.539622",
+        "__class__": "City"
+    },
+    "Amenity.e948afe8-c20d-4100-ba90-5e544586d35b": {
+        "id": "e948afe8-c20d-4100-ba90-5e544586d35b",
+        "created_at": "2023-04-24T11:40:16.539626",
+        "updated_at": "2023-04-24T11:40:16.539629",
+        "__class__": "Amenity"
     }
 }

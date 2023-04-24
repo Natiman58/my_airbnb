@@ -5,6 +5,14 @@
 import json
 import os
 from datetime import datetime
+from models.user import User
+from models.base_model import BaseModel
+
+from models.place import Place
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.review  import Review
 
 class FileStorage:
     """
@@ -12,6 +20,15 @@ class FileStorage:
     """
     __file_path = 'file.json'
     __objects = {}
+    classes = {
+        "BaseModel": BaseModel,
+        "User": User,
+        "Place": Place,
+        "State": State,
+        "City": City,
+        "Amenity": Amenity,
+        "Review": Review
+    }
     
     def all(self):
         """
@@ -32,7 +49,6 @@ class FileStorage:
             saves the object into a json file;
             serialization
         """
-        from models.base_model import BaseModel
         obj_dict = {}
         for key, val in self.__objects.items():
             if isinstance(val, BaseModel):
@@ -51,17 +67,13 @@ class FileStorage:
         """
             deserializes the json file into a dict obj
         """
-        from models.base_model import BaseModel
-        class_map = {
-            'BaseModel': BaseModel
-        }
         try:
             if os.path.isfile(self.__file_path):
                 with open(self.__file_path, 'r') as f:
                     data = json.load(f)
                     for key, value in data.items():
                         class_name = key.split('.')[0]
-                        obj_class = class_map.get(class_name)
+                        obj_class = self.classes.get(class_name)
                         if obj_class:
                             obj = obj_class(**value)
                             self.__objects[key] = obj

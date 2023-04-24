@@ -4,13 +4,14 @@
 """
 from uuid import uuid4
 from datetime import datetime
-from models import storage
+#from models import storage
 
 class BaseModel:
     """
         A base model for all the objects
     """
     def __init__(self, *args, **kwargs):
+        from models import storage
         if kwargs:
             for k, v in kwargs.items():
                 if k != '__class__':
@@ -32,6 +33,7 @@ class BaseModel:
 
     def save(self):
         """updates the upadted at attribute with the current datetime"""
+        from models import storage
         self.updated_at = datetime.now()
         storage.save()
     
@@ -39,9 +41,10 @@ class BaseModel:
         """
             returns all the attributes in the class obj
         """
-        self.__dict__['__class__'] = self.__class__.__name__
-        self.created_at = datetime.now().isoformat()
-        self.updated_at = datetime.now().isoformat()
-        return self.__dict__
+        copy_dict = self.__dict__.copy()
+        copy_dict['__class__'] = self.__class__.__name__
+        copy_dict['created_at'] = datetime.now().isoformat()
+        copy_dict['updated_at'] = datetime.now().isoformat()
+        return copy_dict
 
     
