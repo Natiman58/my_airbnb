@@ -195,12 +195,22 @@ class HBNBCommand(cmd.Cmd):
                 if args[1] == f'destroy({id})':
                     return User.destroy(self, id)
 
+                #  section for updating using attribute and value
                 attr = arg.split(',')[1].strip()  # remove white space around
                 value = arg.split(',')[2].strip()[:-1]  # to remove the ')' in the end
                 if args[1] == f'update({id}, {attr}, {value})':
                     return User.update(self, id, attr, value)
+
+                #  section for updating using id and dict input
+                dict_input = arg.split('{')[1].strip()[:-1]
+                full_dict = '{' + dict_input
+                #print(dict_input)
+                if (args[1] == f'update("{id}", {full_dict})'):
+                    return User.update_dict(self, id, full_dict)
                 else:
                     print("None here")
+
+
             else:
                 print("** no intance found **")
         except UnboundLocalError:
@@ -229,6 +239,12 @@ class HBNBCommand(cmd.Cmd):
                 value = arg.split(',')[2].strip()[:-1]  # to remove the ')' in the end
                 if args[1] == f'update({id}, {attr}, {value})':
                     return Place.update(self, id, attr, value)
+                #  section for updating using id and dict input
+                dict_input = arg.split('{')[1].strip()[:-1]
+                full_dict = '{' + dict_input
+                #print(dict_input)
+                if (args[1] == f'update("{id}", {full_dict})'):
+                    return Place.update_dict(self, id, full_dict)
                 else:
                     print("None here")
             else:
@@ -258,6 +274,12 @@ class HBNBCommand(cmd.Cmd):
                 value = arg.split(',')[2].strip()[:-1]  # to remove the ')' in the end
                 if args[1] == f'update({id}, {attr}, {value})':
                     return State.update(self, id, attr, value)
+                #  section for updating using id and dict input
+                dict_input = arg.split('{')[1].strip()[:-1]
+                full_dict = '{' + dict_input
+                #print(dict_input)
+                if (args[1] == f'update("{id}", {full_dict})'):
+                    return State.update_dict(self, id, full_dict)
                 else:
                     print("None here")
             else:
@@ -287,6 +309,12 @@ class HBNBCommand(cmd.Cmd):
                 value = arg.split(',')[2].strip()[:-1]  # to remove the ')' in the end
                 if args[1] == f'update({id}, {attr}, {value})':
                     return City.update(self, id, attr, value)
+                #  section for updating using id and dict input
+                dict_input = arg.split('{')[1].strip()[:-1]
+                full_dict = '{' + dict_input
+                #print(dict_input)
+                if (args[1] == f'update("{id}", {full_dict})'):
+                    return City.update_dict(self, id, full_dict)
                 else:
                     print("None here")
             else:
@@ -313,6 +341,12 @@ class HBNBCommand(cmd.Cmd):
                 value = arg.split(',')[2].strip()[:-1]  # to remove the ')' in the end
                 if args[1] == f'update({id}, {attr}, {value})':
                     return Review.update(self, id, attr, value)
+                #  section for updating using id and dict input
+                dict_input = arg.split('{')[1].strip()[:-1]
+                full_dict = '{' + dict_input
+                #print(dict_input)
+                if (args[1] == f'update("{id}", {full_dict})'):
+                    return Review.update_dict(self, id, full_dict)
                 else:
                     print("None here")
             else:
@@ -339,6 +373,12 @@ class HBNBCommand(cmd.Cmd):
                 value = arg.split(',')[2].strip()[:-1]  # to remove the ')' in the end
                 if args[1] == f'update({id}, {attr}, {value})':
                     return Amenity.update(self, id, attr, value)
+                #  section for updating using id and dict input
+                dict_input = arg.split('{')[1].strip()[:-1]
+                full_dict = '{' + dict_input
+                #print(dict_input)
+                if (args[1] == f'update("{id}", {full_dict})'):
+                    return Amenity.update_dict(self, id, full_dict)
                 else:
                     print("None here")
             else:

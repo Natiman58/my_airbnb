@@ -5,6 +5,7 @@
 
 from models.base_model import BaseModel
 from datetime import datetime
+import json
 
 
 class City(BaseModel):
@@ -99,4 +100,25 @@ class City(BaseModel):
         if id in id_list:
             obj = storage.all()['City' + '.' + id]
             setattr(obj, attr, value)
+            obj.save()
+
+    def update_dict(self, id, full_dict):
+        """
+            updates an instance using the given id and dict
+        """
+        from models import storage
+        id_list = []
+        all_objs = storage.all()
+        for key in all_objs.keys():
+            obj_id = key.split('.')[1]
+            id_list.append(obj_id)
+        if id in id_list:
+            obj = storage.all()['City' + '.' + id]
+            # replace the single quotes by double quotes
+            json_string = full_dict.replace("'", "\"")
+            # convert the dict string into valid json data
+            json_data = json.loads(json_string)
+            for key, value in json_data.items():
+                setattr(obj, key, value)
+            print(obj)
             obj.save()
