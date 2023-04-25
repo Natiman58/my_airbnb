@@ -194,6 +194,13 @@ class HBNBCommand(cmd.Cmd):
                     return User.show(self, id)
                 if args[1] == f'destroy({id})':
                     return User.destroy(self, id)
+
+                attr = arg.split(',')[1].strip()  # remove white space around
+                value = arg.split(',')[2].strip()[:-1]  # to remove the ')' in the end
+                if args[1] == f'update({id}, {attr}, {value})':
+                    return User.update(self, id, attr, value)
+                else:
+                    print("None here")
             else:
                 print("** no intance found **")
         except UnboundLocalError:
@@ -218,6 +225,12 @@ class HBNBCommand(cmd.Cmd):
                     return Place.show(self, id)
                 if args[1] == f'destroy({id})':
                     return Place.destroy(self, id)
+                attr = arg.split(',')[1].strip()  # remove white space around
+                value = arg.split(',')[2].strip()[:-1]  # to remove the ')' in the end
+                if args[1] == f'update({id}, {attr}, {value})':
+                    return Place.update(self, id, attr, value)
+                else:
+                    print("None here")
             else:
                 print("** no intance found **")
         except UnboundLocalError:
@@ -241,6 +254,12 @@ class HBNBCommand(cmd.Cmd):
                     return State.show(self, id)
                 if args[1] == f'destroy({id})':
                     return State.destroy(self, id)
+                attr = arg.split(',')[1].strip()  # remove white space around
+                value = arg.split(',')[2].strip()[:-1]  # to remove the ')' in the end
+                if args[1] == f'update({id}, {attr}, {value})':
+                    return State.update(self, id, attr, value)
+                else:
+                    print("None here")
             else:
                 print("** no intance found **")
         except UnboundLocalError:
@@ -264,6 +283,12 @@ class HBNBCommand(cmd.Cmd):
                     return City.show(self, id)
                 if args[1] == f"destroy({id})":
                     return City.destroy(self, id)
+                attr = arg.split(',')[1].strip()  # remove white space around
+                value = arg.split(',')[2].strip()[:-1]  # to remove the ')' in the end
+                if args[1] == f'update({id}, {attr}, {value})':
+                    return City.update(self, id, attr, value)
+                else:
+                    print("None here")
             else:
                 print("** no intance found **")
         except UnboundLocalError:
@@ -284,6 +309,12 @@ class HBNBCommand(cmd.Cmd):
                     return Review.show(self, id)
                 if args[1] == f"destroy({id})":
                     return Review.destroy(self, id)
+                attr = arg.split(',')[1].strip()  # remove white space around
+                value = arg.split(',')[2].strip()[:-1]  # to remove the ')' in the end
+                if args[1] == f'update({id}, {attr}, {value})':
+                    return Review.update(self, id, attr, value)
+                else:
+                    print("None here")
             else:
                 print("** no intance found **")
         except UnboundLocalError:
@@ -304,6 +335,12 @@ class HBNBCommand(cmd.Cmd):
                     return Amenity.show(self, id)
                 if args[1] == f"destroy({id})":
                     return Amenity.destroy(self, id)
+                attr = arg.split(',')[1].strip()  # remove white space around
+                value = arg.split(',')[2].strip()[:-1]  # to remove the ')' in the end
+                if args[1] == f'update({id}, {attr}, {value})':
+                    return Amenity.update(self, id, attr, value)
+                else:
+                    print("None here")
             else:
                 print("** no intance found **")
         except UnboundLocalError:

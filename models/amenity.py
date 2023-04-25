@@ -83,3 +83,19 @@ class Amenity(BaseModel):
         if id in id_list:
             del storage.all()['Amenity' + '.' + id]
             storage.save()
+
+    def update(self, id, attr, value):
+        """
+            updates an instance to the given attribute and value
+            for the given id
+        """
+        from models import storage
+        id_list = []
+        all_objs = storage.all()
+        for key in all_objs.keys():
+            obj_id = key.split('.')[1]
+            id_list.append(obj_id)
+        if id in id_list:
+            obj = storage.all()['Amenity' + '.' + id]
+            setattr(obj, attr, value)
+            obj.save()
