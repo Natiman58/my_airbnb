@@ -192,6 +192,8 @@ class HBNBCommand(cmd.Cmd):
                 id = match.group()
                 if args[1] == f'show({id})':
                     return User.show(self, id)
+                if args[1] == f'destroy({id})':
+                    return User.destroy(self, id)
             else:
                 print("** no intance found **")
         except UnboundLocalError:
@@ -214,6 +216,8 @@ class HBNBCommand(cmd.Cmd):
                 id = match.group()
                 if args[1] == f'show({id})':
                     return Place.show(self, id)
+                if args[1] == f'destroy({id})':
+                    return Place.destroy(self, id)
             else:
                 print("** no intance found **")
         except UnboundLocalError:
@@ -235,6 +239,8 @@ class HBNBCommand(cmd.Cmd):
                 id = match.group()
                 if args[1] == f'show({id})':
                     return State.show(self, id)
+                if args[1] == f'destroy({id})':
+                    return State.destroy(self, id)
             else:
                 print("** no intance found **")
         except UnboundLocalError:
@@ -256,6 +262,8 @@ class HBNBCommand(cmd.Cmd):
                 id = match.group()
                 if args[1] == f'show({id})':
                     return City.show(self, id)
+                if args[1] == f"destroy({id})":
+                    return City.destroy(self, id)
             else:
                 print("** no intance found **")
         except UnboundLocalError:
@@ -274,6 +282,8 @@ class HBNBCommand(cmd.Cmd):
                 id = match.group()
                 if args[1] == f'show({id})':
                     return Review.show(self, id)
+                if args[1] == f"destroy({id})":
+                    return Review.destroy(self, id)
             else:
                 print("** no intance found **")
         except UnboundLocalError:
@@ -292,6 +302,8 @@ class HBNBCommand(cmd.Cmd):
                 id = match.group()
                 if args[1] == f'show({id})':
                     return Amenity.show(self, id)
+                if args[1] == f"destroy({id})":
+                    return Amenity.destroy(self, id)
             else:
                 print("** no intance found **")
         except UnboundLocalError:

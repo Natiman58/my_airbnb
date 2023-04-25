@@ -75,3 +75,17 @@ class User(BaseModel):
             #class_name = all_objs[key].__class__.__name__
             obj = storage.all()['User' + '.' + id]
             print(obj)
+
+    def destroy(self, id):
+        """
+            TO destroy a user object based on the given id
+        """
+        from models import storage
+        id_list = []
+        all_objs = storage.all()
+        for key in all_objs.keys():
+            obj_id = key.split('.')[1]
+            id_list.append(obj_id)
+        if id in id_list:
+            del storage.all()['User' + '.' + id]
+            storage.save()

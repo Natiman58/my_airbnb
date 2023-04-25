@@ -69,3 +69,17 @@ class State(BaseModel):
             #class_name = all_objs[key].__class__.__name__
             obj = storage.all()['State' + '.' + id]
             print(obj)
+
+    def destroy(self, id):
+        """
+            Destroys the instance using the given id
+        """
+        from models import storage
+        id_list = []
+        all_objs = storage.all()
+        for key in all_objs.keys():
+            obj_id = key.split('.')[1]
+            id_list.append(obj_id)
+        if id in id_list:
+            del storage.all()['State' + '.' + id]
+            storage.save()
