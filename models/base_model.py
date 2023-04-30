@@ -13,15 +13,14 @@ class BaseModel:
     def __init__(self, *args, **kwargs):
         from models import storage
         if kwargs:
-            for k, v in kwargs.items():
-                if k != '__class__':
-                    self.id = kwargs.get('id')
-                    self.created_at = datetime.strptime(kwargs.get('created_at'), '%Y-%m-%dT%H:%M:%S.%f')
-                    self.updated_at = datetime.strptime(kwargs.get('updated_at'), '%Y-%m-%dT%H:%M:%S.%f')
+            for key, value in kwargs.items():
+                if key == "created_at" or key == "updated_at":
+                    value = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
+                if key != "__class__":
+                    setattr(self, key, value)
         else:
             self.id = str(uuid4())
-            self.created_at = datetime.now()
-            self.updated_at = datetime.now()
+            self.created_at = self.updated_at = datetime.now()
             storage.new(self)
 
     def __str__(self):
@@ -32,7 +31,7 @@ class BaseModel:
         return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
 
     def save(self):
-        """updates the upadted at attribute with the current datetime"""
+        """updates the updated at attribute with the current datetime"""
         from models import storage
         self.updated_at = datetime.now()
         storage.save()
@@ -41,10 +40,10 @@ class BaseModel:
         """
             returns all the attributes in the class obj
         """
-        copy_dict = self.__dict__.copy()
-        copy_dict['__class__'] = self.__class__.__name__
-        copy_dict['created_at'] = datetime.now().isoformat()
-        copy_dict['updated_at'] = datetime.now().isoformat()
-        return copy_dict
+        d = self.__dict__.copy()
+        d['__class__'] = self.__class__.__name__
+        d['created_at'] = self.created_at.isoformat()
+        d['updated_at'] = self.updated_at.isoformat()
+        return d
 
     

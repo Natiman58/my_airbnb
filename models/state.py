@@ -98,7 +98,11 @@ class State(BaseModel):
             id_list.append(obj_id)
         if id in id_list:
             obj = storage.all()['State' + '.' + id]
-            setattr(obj, attr, value)
+            if '"' in value:
+                claen_val = value.strip()[1:-1]  # remove the quotes
+            else:
+                claen_val = value
+            setattr(obj, attr, claen_val)
             obj.save()
 
     def update_dict(self, id, full_dict):

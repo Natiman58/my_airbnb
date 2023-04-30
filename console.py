@@ -7,7 +7,6 @@ import cmd
 from models.base_model import BaseModel
 from datetime import datetime
 from models.user import User
-
 from models.city import City
 from models.place import Place
 from models.state import State
@@ -190,26 +189,24 @@ class HBNBCommand(cmd.Cmd):
             match = re.search(pattern, args[1])
             if match:
                 id = match.group()
-                if args[1] == f'show({id})':
+                if args[1] == f'show("{id}")':
                     return User.show(self, id)
-                if args[1] == f'destroy({id})':
+                if args[1] == f'destroy("{id}")':
                     return User.destroy(self, id)
 
                 #  section for updating using attribute and value
-                attr = arg.split(',')[1].strip()  # remove white space around
-                value = arg.split(',')[2].strip()[:-1]  # to remove the ')' in the end
-                if args[1] == f'update({id}, {attr}, {value})':
+                attr = arg.split(',')[1].strip()[1:-1]  # remove white space around
+                value = arg.split(',')[2].strip()[: -1]  # to remove the ')' in the end
+                if(args[1] == f'update("{id}", "{attr}", {value})'):
                     return User.update(self, id, attr, value)
 
                 #  section for updating using id and dict input
                 dict_input = arg.split('{')[1].strip()[:-1]
                 full_dict = '{' + dict_input
-                #print(dict_input)
                 if (args[1] == f'update("{id}", {full_dict})'):
                     return User.update_dict(self, id, full_dict)
                 else:
                     print("None here")
-
 
             else:
                 print("** no intance found **")
@@ -231,22 +228,22 @@ class HBNBCommand(cmd.Cmd):
             match = re.search(pattern, args[1])
             if match:
                 id = match.group()
-                if args[1] == f'show({id})':
+                if args[1] == f'show("{id}")':
                     return Place.show(self, id)
-                if args[1] == f'destroy({id})':
+                if args[1] == f'destroy("{id}")':
                     return Place.destroy(self, id)
-                attr = arg.split(',')[1].strip()  # remove white space around
-                value = arg.split(',')[2].strip()[:-1]  # to remove the ')' in the end
-                if args[1] == f'update({id}, {attr}, {value})':
+
+                #  section for updating using attribute and value
+                attr = arg.split(',')[1].strip()[1:-1]  # remove white space around
+                value = arg.split(',')[2].strip()[: -1]  # to remove the ')' in the end
+                if(args[1] == f'update("{id}", "{attr}", {value})'):
                     return Place.update(self, id, attr, value)
+
                 #  section for updating using id and dict input
                 dict_input = arg.split('{')[1].strip()[:-1]
                 full_dict = '{' + dict_input
-                #print(dict_input)
                 if (args[1] == f'update("{id}", {full_dict})'):
                     return Place.update_dict(self, id, full_dict)
-                else:
-                    print("None here")
             else:
                 print("** no intance found **")
         except UnboundLocalError:
@@ -266,14 +263,17 @@ class HBNBCommand(cmd.Cmd):
             match = re.search(pattern, args[1])
             if match:
                 id = match.group()
-                if args[1] == f'show({id})':
+                if args[1] == f'show("{id}")':
                     return State.show(self, id)
-                if args[1] == f'destroy({id})':
+                if args[1] == f'destroy("{id}")':
                     return State.destroy(self, id)
-                attr = arg.split(',')[1].strip()  # remove white space around
-                value = arg.split(',')[2].strip()[:-1]  # to remove the ')' in the end
-                if args[1] == f'update({id}, {attr}, {value})':
+
+                #  section for updating using attribute and value
+                attr = arg.split(',')[1].strip()[1:-1]  # remove white space around
+                value = arg.split(',')[2].strip()[: -1]  # to remove the ')' in the end
+                if(args[1] == f'update("{id}", "{attr}", {value})'):
                     return State.update(self, id, attr, value)
+
                 #  section for updating using id and dict input
                 dict_input = arg.split('{')[1].strip()[:-1]
                 full_dict = '{' + dict_input
@@ -301,13 +301,13 @@ class HBNBCommand(cmd.Cmd):
             match = re.search(pattern, args[1])
             if match:
                 id = match.group()
-                if args[1] == f'show({id})':
+                if args[1] == f'show("{id}")':
                     return City.show(self, id)
-                if args[1] == f"destroy({id})":
+                if args[1] == f'destroy("{id}")':
                     return City.destroy(self, id)
-                attr = arg.split(',')[1].strip()  # remove white space around
+                attr = arg.split(',')[1].strip()[1:-1]  # remove white space around
                 value = arg.split(',')[2].strip()[:-1]  # to remove the ')' in the end
-                if args[1] == f'update({id}, {attr}, {value})':
+                if args[1] == f'update("{id}", "{attr}", {value})':
                     return City.update(self, id, attr, value)
                 #  section for updating using id and dict input
                 dict_input = arg.split('{')[1].strip()[:-1]
@@ -333,13 +333,13 @@ class HBNBCommand(cmd.Cmd):
             match = re.search(pattern, args[1])
             if match:
                 id = match.group()
-                if args[1] == f'show({id})':
+                if args[1] == f'show("{id}")':
                     return Review.show(self, id)
-                if args[1] == f"destroy({id})":
+                if args[1] == f'destroy("{id}")':
                     return Review.destroy(self, id)
-                attr = arg.split(',')[1].strip()  # remove white space around
+                attr = arg.split(',')[1].strip()[1:-1]  # remove white space around
                 value = arg.split(',')[2].strip()[:-1]  # to remove the ')' in the end
-                if args[1] == f'update({id}, {attr}, {value})':
+                if args[1] == f'update("{id}", "{attr}", {value})':
                     return Review.update(self, id, attr, value)
                 #  section for updating using id and dict input
                 dict_input = arg.split('{')[1].strip()[:-1]
@@ -365,13 +365,13 @@ class HBNBCommand(cmd.Cmd):
             match = re.search(pattern, args[1])
             if match:
                 id = match.group()
-                if args[1] == f'show({id})':
+                if args[1] == f'show("{id}")':
                     return Amenity.show(self, id)
-                if args[1] == f"destroy({id})":
+                if args[1] == f'destroy("{id}")':
                     return Amenity.destroy(self, id)
-                attr = arg.split(',')[1].strip()  # remove white space around
+                attr = arg.split(',')[1].strip()[1:-1]  # remove white space around
                 value = arg.split(',')[2].strip()[:-1]  # to remove the ')' in the end
-                if args[1] == f'update({id}, {attr}, {value})':
+                if args[1] == f'update("{id}", "{attr}", {value})':
                     return Amenity.update(self, id, attr, value)
                 #  section for updating using id and dict input
                 dict_input = arg.split('{')[1].strip()[:-1]
