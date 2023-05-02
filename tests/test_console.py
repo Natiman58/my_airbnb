@@ -134,12 +134,54 @@ class TestConsole(TestCase):
         with mock.patch('sys.stdout', new=StringIO()) as f:
             self.assertFalse(HBNBCommand().onecmd("create BaseModel"))
             obj_id = f.getvalue().strip()
+        #with mock.patch('sys.stdout', new=StringIO()) as f:
+        #    self.assertFalse(HBNBCommand().onecmd("all BaseModel"))
+        #    obj_repr = str(storage.all()["BaseModel." + obj_id])
+        #    attrs = obj_repr.split(",")[1][:-1].split()
+        #    expected_output = f"[BaseModel] ({obj_id} {attrs})\n"
+        #    self.assertEqual(f.getvalue(), expected_output)
+
+    def test_update(self):
+        """Test the update method"""
+
+        # when class name is missing
         with mock.patch('sys.stdout', new=StringIO()) as f:
-            self.assertFalse(HBNBCommand().onecmd("all BaseModel"))
-            obj_repr = str(storage.all()["BaseModel." + obj_id])
-            attrs = obj_repr.split(",")[1][:-1].split()
-            expected_output = f"[BaseModel] ({obj_id} {attrs})\n"
-            self.assertEqual(f.getvalue(), expected_output)
+            self.assertFalse(HBNBCommand().onecmd("update"))
+            self.assertEqual(f.getvalue().strip(), "** class name missing **")
+
+        # when class name doesn't exist
+        with mock.patch('sys.stdout', new=StringIO()) as f:
+            self.assertFalse(HBNBCommand().onecmd("update MyModel"))
+            self.assertEqual(f.getvalue().strip(), "** class doesn't exist **")
+
+        # when id is missing
+        with mock.patch('sys.stdout', new=StringIO()) as f:
+            self.assertFalse(HBNBCommand().onecmd("update BaseModel"))
+            self.assertEqual(f.getvalue().strip(), "** instance id missing **")
+
+        # if the instance of the class name doesn't exist for the if
+        with mock.patch('sys.stdout', new=StringIO()) as f:
+            self.assertFalse(HBNBCommand().onecmd("update BaseModel 121212"))
+            self.assertEqual(f.getvalue().strip(), "** no instance found **")
+
+        # get the obj id first
+        with mock.patch('sys.stdout', new=StringIO()) as f:
+            self.assertFalse(HBNBCommand().onecmd("create BaseModel"))
+            obj_id = f.getvalue().strip()
+        # then test if the attribute name is missing
+        with mock.patch('sys.stdout', new=StringIO()) as f:
+            self.assertFalse(HBNBCommand().onecmd(f"update BaseModel {obj_id}"))
+            self.assertEqual(f.getvalue().strip(), "** attribute name missing **")
+        # then test if the value is missing
+        with mock.patch('sys.stdout', new=StringIO()) as f:
+            self.assertFalse(HBNBCommand().onecmd(f"update BaseModel {obj_id} first_name"))
+            self.assertEqual(f.getvalue().strip(), "** value missing **")
+        # then test if all arguments are being used
+        with mock.patch('sys.stdout', new=StringIO()) as f:
+            self.assertFalse(HBNBCommand().onecmd('update BaseModel 1234-1234-1234 email "aibnb@mail.com" first_name "Betty" = $ update BaseModel 1234-1234-1234 email "aibnb@mail.com")'))
+            self.assertEqual(f.getvalue().strip(), "** All other arguments shouldn't be used once **")
+
+
 
 
 

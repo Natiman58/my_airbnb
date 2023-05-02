@@ -144,23 +144,30 @@ class HBNBCommand(cmd.Cmd):
         args = arg.split()
         if len(args) == 0:
             print("** class name missing **")
+            return
         class_name = args[0]
         if class_name not in self.classes:
             print("** class doesn't exist **")
+            return
         if len(args) == 1:
             print("** instance id missing **")
+            return
         if len(args) > 4:
-            print("** Not allowed to update more than one instance **")
+            print("** All other arguments shouldn't be used once **")
+            return
         obj_id = args[1]
         input_key = class_name + '.' + obj_id
         all_objs = storage.all()
 
         if input_key not in all_objs:
             print("** no instance found **")
+            return
         if len(args) == 2:
             print("** attribute name missing **")
+            return
         if len(args) == 3:
             print(" ** value missing ** ")
+            return
         else:
             try:
                 attr_name = args[2]
