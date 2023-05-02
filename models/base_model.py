@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-    A base model for all the objectes
+    A base model for all the objects
 """
 from uuid import uuid4
 from datetime import datetime

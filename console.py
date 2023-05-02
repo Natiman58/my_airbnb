@@ -14,6 +14,7 @@ from models.amenity import Amenity
 from models.review import Review
 import re
 
+
 class HBNBCommand(cmd.Cmd):
     """
         A class representing the console
@@ -43,7 +44,7 @@ class HBNBCommand(cmd.Cmd):
         and saves it to a json file and prints the id
         """
         if len(arg) == 0:
-            print("** class name missing ** ")
+            print("** class name missing **")
             return
         try:
             obj = eval(arg)()
@@ -107,8 +108,10 @@ class HBNBCommand(cmd.Cmd):
                 obj_dict.pop('__class__', None)
                 for key, value in obj_dict.items():
                     if key in ['created_at', 'updated_at']:
-                        obj_dict[key] = datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f')
-                obj_str = f"[{obj.__class__.__name__}] ({obj.id}) {obj_dict}"
+                        date_format = '%Y-%m-%dT%H:%M:%S.%f'
+                        obj_dict[key] = datetime.strptime(value, date_format)
+                obj_name = obj.__class__.__name__
+                obj_str = f"[{obj_name}] ({obj.id}) {obj_dict}"
                 obj_list.append(obj_str)
             print(obj_list)
         else:
@@ -121,8 +124,11 @@ class HBNBCommand(cmd.Cmd):
                     obj_dict.pop('__class__', None)
                     for key, value in obj_dict.items():
                         if key in ['created_at', 'updated_at']:
-                            obj_dict[key] = datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f')
-                    obj_str = f"[{obj.__class__.__name__}] ({obj.id}) {obj_dict}"
+                            date_format = '%Y-%m-%dT%H:%M:%S.%f'
+                            date_obj = datetime.strptime(value, date_format)
+                            obj_dict[key] = date_obj
+                    obj_name = obj.__class__.__name__
+                    obj_str = f"[{obj_name}] ({obj.id}) {obj_dict}"
                     obj_list.append(obj_str)
                 print(obj_list)
             else:
@@ -167,7 +173,9 @@ class HBNBCommand(cmd.Cmd):
                     obj_dict.pop('__class__', None)
                     for key, value in obj_dict.items():
                         if key in ['created_at', 'updated_at']:
-                            obj_dict[key] = datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f')
+                            date_format = '%Y-%m-%dT%H:%M:%S.%f'
+                            date_obj = datetime.strptime(value, date_format)
+                            obj_dict[key] = date_obj
 
                 obj = all_objs[input_key]
                 setattr(obj, attr_name, attr_value_str)
@@ -185,7 +193,8 @@ class HBNBCommand(cmd.Cmd):
         if args[1] == 'count()':
             return User.count(self)
         try:
-            pattern = r'([a-f\d]{8}(-[a-f\d]{4}){3}-[a-f\d]{12})' # regx pattern to match uuid format
+            # regx pattern to match uuid format
+            pattern = r'([a-f\d]{8}(-[a-f\d]{4}){3}-[a-f\d]{12})'
             match = re.search(pattern, args[1])
             if match:
                 id = match.group()
@@ -195,8 +204,11 @@ class HBNBCommand(cmd.Cmd):
                     return User.destroy(self, id)
 
                 #  section for updating using attribute and value
-                attr = arg.split(',')[1].strip()[1:-1]  # remove white space around
-                value = arg.split(',')[2].strip()[: -1]  # to remove the ')' in the end
+                # remove white space around
+                attr = arg.split(',')[1].strip()[1:-1]
+
+                # to remove the ')' in the end
+                value = arg.split(',')[2].strip()[: -1]
                 if(args[1] == f'update("{id}", "{attr}", {value})'):
                     return User.update(self, id, attr, value)
 
@@ -213,7 +225,6 @@ class HBNBCommand(cmd.Cmd):
         except UnboundLocalError:
             pass
 
-
     def do_Place(self, arg):
         """
             handle the user commands
@@ -224,7 +235,8 @@ class HBNBCommand(cmd.Cmd):
         if args[1] == 'count()':
             return Place.count(self)
         try:
-            pattern = r'([a-f\d]{8}(-[a-f\d]{4}){3}-[a-f\d]{12})' # regx pattern to match uuid format
+            # regx pattern to match uuid format
+            pattern = r'([a-f\d]{8}(-[a-f\d]{4}){3}-[a-f\d]{12})'
             match = re.search(pattern, args[1])
             if match:
                 id = match.group()
@@ -234,8 +246,11 @@ class HBNBCommand(cmd.Cmd):
                     return Place.destroy(self, id)
 
                 #  section for updating using attribute and value
-                attr = arg.split(',')[1].strip()[1:-1]  # remove white space around
-                value = arg.split(',')[2].strip()[: -1]  # to remove the ')' in the end
+                # remove white space around
+                attr = arg.split(',')[1].strip()[1:-1]
+
+                # to remove the ')' in the end
+                value = arg.split(',')[2].strip()[: -1]
                 if(args[1] == f'update("{id}", "{attr}", {value})'):
                     return Place.update(self, id, attr, value)
 
@@ -259,7 +274,8 @@ class HBNBCommand(cmd.Cmd):
         if args[1] == 'count()':
             return State.count(self)
         try:
-            pattern = r'([a-f\d]{8}(-[a-f\d]{4}){3}-[a-f\d]{12})' # regx pattern to match uuid format
+            # regx pattern to match uuid format
+            pattern = r'([a-f\d]{8}(-[a-f\d]{4}){3}-[a-f\d]{12})'
             match = re.search(pattern, args[1])
             if match:
                 id = match.group()
@@ -268,16 +284,17 @@ class HBNBCommand(cmd.Cmd):
                 if args[1] == f'destroy("{id}")':
                     return State.destroy(self, id)
 
-                #  section for updating using attribute and value
-                attr = arg.split(',')[1].strip()[1:-1]  # remove white space around
-                value = arg.split(',')[2].strip()[: -1]  # to remove the ')' in the end
+                # section for updating using attribute and value
+                # remove white space around
+                attr = arg.split(',')[1].strip()[1:-1]
+                # to remove the ')' in the end
+                value = arg.split(',')[2].strip()[: -1]
                 if(args[1] == f'update("{id}", "{attr}", {value})'):
                     return State.update(self, id, attr, value)
 
                 #  section for updating using id and dict input
                 dict_input = arg.split('{')[1].strip()[:-1]
                 full_dict = '{' + dict_input
-                #print(dict_input)
                 if (args[1] == f'update("{id}", {full_dict})'):
                     return State.update_dict(self, id, full_dict)
                 else:
@@ -297,7 +314,8 @@ class HBNBCommand(cmd.Cmd):
         elif args[1] == 'count()':
             return City.count(self)
         try:
-            pattern = r'([a-f\d]{8}(-[a-f\d]{4}){3}-[a-f\d]{12})' # regx pattern to match uuid format
+            # regx pattern to match uuid format
+            pattern = r'([a-f\d]{8}(-[a-f\d]{4}){3}-[a-f\d]{12})'
             match = re.search(pattern, args[1])
             if match:
                 id = match.group()
@@ -305,14 +323,16 @@ class HBNBCommand(cmd.Cmd):
                     return City.show(self, id)
                 if args[1] == f'destroy("{id}")':
                     return City.destroy(self, id)
-                attr = arg.split(',')[1].strip()[1:-1]  # remove white space around
-                value = arg.split(',')[2].strip()[:-1]  # to remove the ')' in the end
+
+                # remove white space around
+                attr = arg.split(',')[1].strip()[1:-1]
+                # to remove the ')' in the end
+                value = arg.split(',')[2].strip()[:-1]
                 if args[1] == f'update("{id}", "{attr}", {value})':
                     return City.update(self, id, attr, value)
                 #  section for updating using id and dict input
                 dict_input = arg.split('{')[1].strip()[:-1]
                 full_dict = '{' + dict_input
-                #print(dict_input)
                 if (args[1] == f'update("{id}", {full_dict})'):
                     return City.update_dict(self, id, full_dict)
                 else:
@@ -329,7 +349,8 @@ class HBNBCommand(cmd.Cmd):
         elif args[1] == 'count()':
             return Review.count(self)
         try:
-            pattern = r'([a-f\d]{8}(-[a-f\d]{4}){3}-[a-f\d]{12})' # regx pattern to match uuid format
+            # regx pattern to match uuid format
+            pattern = r'([a-f\d]{8}(-[a-f\d]{4}){3}-[a-f\d]{12})'
             match = re.search(pattern, args[1])
             if match:
                 id = match.group()
@@ -337,14 +358,16 @@ class HBNBCommand(cmd.Cmd):
                     return Review.show(self, id)
                 if args[1] == f'destroy("{id}")':
                     return Review.destroy(self, id)
-                attr = arg.split(',')[1].strip()[1:-1]  # remove white space around
-                value = arg.split(',')[2].strip()[:-1]  # to remove the ')' in the end
+
+                # remove white space around
+                attr = arg.split(',')[1].strip()[1:-1]
+                # to remove the ')' in the end
+                value = arg.split(',')[2].strip()[:-1]
                 if args[1] == f'update("{id}", "{attr}", {value})':
                     return Review.update(self, id, attr, value)
                 #  section for updating using id and dict input
                 dict_input = arg.split('{')[1].strip()[:-1]
                 full_dict = '{' + dict_input
-                #print(dict_input)
                 if (args[1] == f'update("{id}", {full_dict})'):
                     return Review.update_dict(self, id, full_dict)
                 else:
@@ -361,7 +384,8 @@ class HBNBCommand(cmd.Cmd):
         elif args[1] == 'count()':
             return Amenity.count(self)
         try:
-            pattern = r'([a-f\d]{8}(-[a-f\d]{4}){3}-[a-f\d]{12})' # regx pattern to match uuid format
+            # regx pattern to match uuid format
+            pattern = r'([a-f\d]{8}(-[a-f\d]{4}){3}-[a-f\d]{12})'
             match = re.search(pattern, args[1])
             if match:
                 id = match.group()
@@ -369,14 +393,16 @@ class HBNBCommand(cmd.Cmd):
                     return Amenity.show(self, id)
                 if args[1] == f'destroy("{id}")':
                     return Amenity.destroy(self, id)
-                attr = arg.split(',')[1].strip()[1:-1]  # remove white space around
-                value = arg.split(',')[2].strip()[:-1]  # to remove the ')' in the end
+
+                # remove white space around
+                attr = arg.split(',')[1].strip()[1:-1]
+                # to remove the ')' in the end
+                value = arg.split(',')[2].strip()[:-1]
                 if args[1] == f'update("{id}", "{attr}", {value})':
                     return Amenity.update(self, id, attr, value)
                 #  section for updating using id and dict input
                 dict_input = arg.split('{')[1].strip()[:-1]
                 full_dict = '{' + dict_input
-                #print(dict_input)
                 if (args[1] == f'update("{id}", {full_dict})'):
                     return Amenity.update_dict(self, id, full_dict)
                 else:
