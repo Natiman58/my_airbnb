@@ -94,3 +94,7 @@ article {
     font-size: initial;
     text-align: initial;
 }
+.amenities {
+    text-align: left;
+    margin-top: 40px;
+}
