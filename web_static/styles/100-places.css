@@ -94,7 +94,51 @@ article {
     font-size: initial;
     text-align: initial;
 }
-.amenities {
+.info_amenities {
+    font-size: 16px;
     text-align: left;
-    margin-top: 40px;
+    padding-left: 11%;
+    border-bottom: 1px solid #DDDDDD;
+    padding-top: 8%;
+}
+.icon_ameni_list ul li::before {
+    content: url("../images/icon_tv.png");
+    margin-right: 10px;
+    margin-left: -100%;
+    position: static;
+}
+
+.icon_ameni_list ul li {
+    width: 14%;
+    font-size: 27px;
+    display: flex;
+    align-items: center;
+}
+
+.wifi_icon_list ul li::before {
+    content: url("../images/icon_wifi.png");
+    margin-right: 10px;
+    margin-left: -100%;
+    position: static;
+}
+
+.wifi_icon_list ul li {
+    width: 14%;
+    font-size: 27px;
+    display: flex;
+    align-items: center;
+}
+
+.pets_icon_list ul li::before {
+    content: url("../images/icon_pets.png");
+    margin-right: 10px;
+    margin-left: -23%;
+    position: static;
+}
+
+.pets_icon_list ul li {
+    width: 63%;
+    font-size: 27px;
+    display: flex;
+    align-items: center;
 }
