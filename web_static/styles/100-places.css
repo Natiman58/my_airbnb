@@ -9,7 +9,7 @@ article {
     margin: 20px;
     border: 1px solid #FF5A5F;
     border-radius: 4px;
-    display: inline-block;
+    display: inline-grid;
     text-align: center;
 }
 
@@ -22,21 +22,31 @@ article {
     border: 4px solid #FF5A5F;
     border-radius: 50%;
     min-width: 60px;
-    min-height: 60px;
+    height: 80px;
+    width: 80px;
     font-size: 30px;
-    margin-top: -31%;
-    margin-bottom: 8%;
+    margin-top: -9%;
+    padding-bottom: 0%;
+    padding-top: 0%;
+    margin-bottom: 10px;
     margin-left: 74%;
+    z-index: -1;
 }
 
+.price p {
+    margin-bottom: 0%;
+    margin-top: 26%;
+}
 .place_type {
     display: inline;
 }
 
 .places h2 {
+    font-size: 30px;
     width: 100%;
-    margin-left: -12%;
-    margin-top: -2%;
+    display: block;
+    margin-bottom: 0%;
+    margin-top: 0%;
 }
 
 .information {
@@ -95,12 +105,18 @@ article {
     text-align: initial;
 }
 .info_amenities {
-    font-size: 16px;
     text-align: left;
     padding-left: 11%;
     border-bottom: 1px solid #DDDDDD;
     padding-top: 8%;
 }
+
+.info_amenities h2 {
+    font-size: 16px;
+    margin-top: -8%;
+    margin-left: -12%;
+}
+
 .icon_ameni_list ul li::before {
     content: url("../images/icon_tv.png");
     margin-right: 10px;
@@ -141,4 +157,33 @@ article {
     font-size: 27px;
     display: flex;
     align-items: center;
+}
+
+.places .reviews {
+    margin-top: 40px;
+}
+.places .reviews h2 {
+    font-size: 16px;
+    border-bottom: 1px solid #DDDDDD;
+    display: flex;
+    margin: auto;
+}
+
+.places .reviews h3 {
+    font-size: 14px;
+    margin: auto;
+    padding-top: 3%;
+}
+
+.places .reviews p {
+    font-size: 12px;
+}
+
+.places .reviews ul {
+    display: block;
+    justify-content: center;
+    text-align: left;
+    width: 100%;
+    margin: auto;
+    padding-left: 0%;
 }
