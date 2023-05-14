@@ -1,18 +1,22 @@
 .container {
     background-color: white;
     max-width: 1000px;
+    width: 100%;
     margin-top: 30px;
     margin-bottom: 30px;
     margin-left: auto;
     margin-right: auto;
 }
 .filters {
+    width: 90%;
+    margin: auto;
+    background-color: white;
     height: 70px;
-    color: white;
-    width: 100%;
     border: 1px solid #DDDDDD;
     border-radius: 4px;
     display: flex;
+    align-items: center;
+    position: relative;
 }
 
 .button {
@@ -58,15 +62,18 @@ h4 {
     margin-left: 50px;
     margin-bottom: 0%;
 }
+
 .locations .popover {
-    margin-top: 18px;
+    margin-top: 2px;
     background-color: #FAFAFA;
     z-index: 1;
-    display: none;
+    display: block;
     flex-direction: column;
+    width: 33%;
     min-width: 12.8%;
     min-height: 15em;
     border: 1px solid #DDDDDD;
+    position: absolute;
 
     animation: growDown 300ms ease-in-out forwards;
     transform-origin: top center;
@@ -74,10 +81,11 @@ h4 {
 
 .amenities .popover {
     padding-top: 1.5em;
-    margin-top: 18px;
+    margin-top: 1px;
+    margin-left: 2px;
     background-color: #FAFAFA;
     z-index: 1;
-    display: none;
+    display: block;
     flex-direction: column;
     position: absolute;
     min-width: 13%;
@@ -88,10 +96,9 @@ h4 {
     transform-origin: top center;
 }
 
-
-/* to remove the bullets from the unordred lists */
 ul {
-    list-style: none;
+    list-style: none; /* to remove the bullets from the unordred lists */
+    padding-left: 23px;
 }
 
 
@@ -106,6 +113,7 @@ ul {
         transform: scaleY(1);
     }
 }
+
 .locations:hover .popover {
     display: flex;
 
@@ -123,59 +131,41 @@ ul {
 }
 
 /* To include all range of phones*/
-@media only screen and (max-width:768px) {
-    .locations h3 {
-        margin-left: 12px;
-    }
-    .amenities h3 {
-        margin-left: 12px;
-    }
-    .locations h4, .amenities h4 {
-        font-size: 11px;
-        margin-left: 26px;
-    }
-    .locations .popover {
-        display: flex;
-        flex-wrap: wrap;
-        flex-direction: column;
-        padding-left: 7%;
-        margin-top: 8%;
-    }
-
-    .amenities .popover {
-        display: flex;
-        flex-wrap: wrap;
-        flex-direction: column;
-        margin-top: 10px;
-        margin-left: -1px;
-    }
-    .locations .popover h2 {
-        font-size: 15px;
-    }
-    .locations .popover ul li {
-        font-size: 12px;
-        display: flex;
-        flex-wrap: wrap;
-        flex-direction: column;
-        margin-left: -27px;
-    }
-    .amenities .popover li {
-        margin-left: -30px;
-        font-size: 12px;
-    }
-
+@media only screen and (min-width: 640px) {
     .filters {
-        background-color: white;
         width: 90%;
         margin: auto;
     }
-    .filters .button {
-        margin-right: 4%;
-        font-size: 11px;
+    .filters h3 {
+        font-size: 15px;
+        margin-left: 15px;
     }
-    .places h1 {
-        margin-left: 50px;
+    .filters h4 {
+        font-size: 12px;
+        margin-left: 0px;
+        padding-left: 30px;
     }
+    .amenities .popover {
+        color: blue;
+        margin-top: 10px;
+        margin-left: 8px;
+    }
+    .locations .popover {
+        margin-top: 10px;
+        padding-left: 14px;
+        margin-right: 11%;
+    }
+    .locations .popover h2 {
+        margin-top: 10px;
+        font-size: 15px;
+    }
+    .locations .popover ul {
+        color: red;
+    }
+
+}
+
+@media only screen  and ({
 
 }
 
@@ -202,20 +192,20 @@ ul {
     }
 }*/
 
- /* For desktops */
-@media screen and (min-width: 769px){
+ /* For desktops
+@media screen and (max-width: 769px){
     .filters {
         width: 90%;
         margin: auto;
     }
 
     .locations .popover {
-        display: flex;
+        display: block;
         margin-top: 19px;
     }
 
     .amenities .popover {
-        display: flex;
+        display: none;
         margin-top: 19px;
         padding-right: 0px;
     }
@@ -236,7 +226,7 @@ ul {
         margin-left: -12px;
     }
 
-}
+}*/
 /*
 @media screen and (min-width: 456px) and (max-width: 767px) {
     .filters {
