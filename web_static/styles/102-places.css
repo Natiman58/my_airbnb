@@ -237,6 +237,9 @@ article>h2 {
     .information {
         margin-top: 2%;
     }
+    .price_by_night {
+        font-size: 25px;
+    }
 }
 @media only screen and (max-width: 381px)
 {

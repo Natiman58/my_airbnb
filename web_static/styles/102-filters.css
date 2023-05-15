@@ -9,7 +9,7 @@
 }
 .filters {
     width: 90%;
-    margin: auto;
+    margin: 0 auto;
     background-color: white;
     height: 70px;
     border: 1px solid #DDDDDD;
@@ -47,7 +47,21 @@
     color: black;
     margin-left: 0px;
 }
+.popover {
+    display: none;
+    background-color: #FAFAFA;
+    border: 1px solid #DDDDDD;
+    border-radius: 4px;
+    position: absolute;
+    box-sizing: border-box;
+    width: 25%;
+    top: 100%;
+    margin-top: 0;
+    padding-left: 3%;
 
+    animation: growDown 300ms ease-in-out forwards;
+    transform-origin: top center;
+}
 
 h3 {
     font-weight: 600;
@@ -63,38 +77,7 @@ h4 {
     margin-bottom: 0%;
 }
 
-.locations .popover {
-    margin-top: 2px;
-    background-color: #FAFAFA;
-    z-index: 1;
-    display: block;
-    flex-direction: column;
-    width: 33%;
-    min-width: 12.8%;
-    min-height: 15em;
-    border: 1px solid #DDDDDD;
-    position: absolute;
 
-    animation: growDown 300ms ease-in-out forwards;
-    transform-origin: top center;
-}
-
-.amenities .popover {
-    padding-top: 1.5em;
-    margin-top: 1px;
-    margin-left: 2px;
-    background-color: #FAFAFA;
-    z-index: 1;
-    display: block;
-    flex-direction: column;
-    position: absolute;
-    min-width: 13%;
-    min-height: 6em;
-    border: 1px solid #DDDDDD;
-
-    animation: growDown 300ms ease-in-out forwards;
-    transform-origin: top center;
-}
 
 ul {
     list-style: none; /* to remove the bullets from the unordred lists */
@@ -115,140 +98,98 @@ ul {
 }
 
 .locations:hover .popover {
-    display: flex;
+    display: block;
 
 }
 .amenities:hover .popover {
-    display: flex;
+    display: block;
 }
 
-.locations .popover ul li:hover {
-    background-color: #DDDDDD;
-}
-
-.amenities .popover li:hover {
-    background-color: #DDDDDD;
-}
 
 /* To include all range of phones*/
-@media only screen and (min-width: 640px) {
+
+@media only screen and (max-width: 1030px)
+{
     .filters {
         width: 90%;
-        margin: auto;
+        margin: 0 auto;
     }
-    .filters h3 {
+}
+@media only screen and (max-width: 600px)
+{
+    .filters .locations,.filters .amenities {
+        width: 35%;
+    }
+    .filters .locations ul, .filters .amenities ul  {
+        padding: 0.7em;
+        width: 35%;
+      }
+    .filters .locations li {
+        margin: 0 0 0 5%;
+        padding: 0;
+    }
+    .popover h2 {
         font-size: 15px;
-        margin-left: 15px;
     }
-    .filters h4 {
+    .pricebynight {}
+
+}
+@media only screen and (max-width: 360px)
+{
+    .filters button {
+        font-size: 16px;
+        justify-content: center;
+        right: 8px;
+        width: 25%;
+        padding: 0px;
+    }
+}
+@media only screen and (max-width: 350px)
+{
+    .filters .locations,.filters .amenities {
+        width: 35%;
+        font-size: 0.85em;
+    }
+    .filters .locations h3,  .filters .amenities h3{
+        font-size: 1.1em;
+        margin: 2px 7px;
+    }
+    .locations h4,  .amenities h4{
+        font-weight: 400;
+        font-size: 0.9em;
+        margin: 2px 7px;
+    }
+    .filters .locations ul {
+        padding: 0.1em;
+      }
+    .filters .amenities ul {
+        padding: 0.8em;
+
+    }
+}
+@media only screen and (max-width: 280px)
+{
+    .filters button {
         font-size: 12px;
-        margin-left: 0px;
-        padding-left: 30px;
+        width: 20%;
+        padding: 0;
     }
-    .amenities .popover {
-        color: blue;
-        margin-top: 10px;
-        margin-left: 8px;
-    }
-    .locations .popover {
-        margin-top: 10px;
-        padding-left: 14px;
-        margin-right: 11%;
-    }
-    .locations .popover h2 {
-        margin-top: 10px;
-        font-size: 15px;
-    }
-    .locations .popover ul {
-        color: red;
+    .popover h2 {
+        font-size: 11px;
     }
 
 }
-
-@media only screen  and ({
-
+@media only screen and (max-width: 250px)
+{
+    .filters button {
+        font-size: 11px;
+        width: 20%;
+        padding: 0;
+    }
+    .filters .locations ul{
+        padding: 0;
+      }
+      .filters .amenities ul {
+          padding: 1em;
+      }
 }
-
-/*To include ipads and ipad pros
-@media only screen and (min-width: 768px) and (max-width: 1024px)  {
-    .filters {
-        width: 90%;
-        margin: auto;
-
-    }
-    .locations .popover {
-        display: flex;
-        flex-direction: column;
-        padding-left: 7%;
-        margin-top: 19px;
-    }
-    .amenities .popover {
-        display: block;
-        flex-direction: column;
-    }
-    .places h1 {
-        margin-left: 50px;
-
-    }
-}*/
-
- /* For desktops
-@media screen and (max-width: 769px){
-    .filters {
-        width: 90%;
-        margin: auto;
-    }
-
-    .locations .popover {
-        display: block;
-        margin-top: 19px;
-    }
-
-    .amenities .popover {
-        display: none;
-        margin-top: 19px;
-        padding-right: 0px;
-    }
-    .places h1 {
-        margin-left: 22px;
-    }
-    .locations h3, .amenities h3 {
-        margin-left: 20px;
-    }
-    .locations h4, .amenities h4 {
-        margin-left: 30px;
-    }
-    .locations .popover ul {
-        margin-left: -27px;
-        margin-top: -10px;
-    }
-    .amenities .popover li {
-        margin-left: -12px;
-    }
-
-}*/
-/*
-@media screen and (min-width: 456px) and (max-width: 767px) {
-    .filters {
-        background-color: red;
-    }
-    .locations .popover, .amenities .popover {
-        margin-top: 19px;
-    }
-    .places h1 {
-        margin-left: 22px;
-    }
-    .locations h3, .amenities h3 {
-        margin-left: 20px;
-    }
-    .locations h4, .amenities h4 {
-        margin-left: 30px;
-    }
-    .locations .popover ul {
-        margin-left: -27px;
-        margin-top: -10px;
-    }
-    .amenities .popover li {
-        margin-left: -12px;
-    }
-}*/
