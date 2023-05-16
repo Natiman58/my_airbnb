@@ -350,6 +350,9 @@ class HBNBCommand(cmd.Cmd):
             pass
 
     def do_Review(self, arg):
+        """
+            Handle the review object
+        """
         args = arg.split('.')
         if args[1] == 'all()':
             return Review.all(self)
@@ -385,6 +388,9 @@ class HBNBCommand(cmd.Cmd):
             pass
 
     def do_Amenity(self, arg):
+        """
+            Handles the Amenity object
+        """
         args = arg.split('.')
         if args[1] == 'all()':
             return Amenity.all(self)
